@@ -71,22 +71,24 @@ public class Post05 extends DummyRestApiBaseUrl {
      */
 
     @Test
-    public void post01(){
-        spec.pathParam("first","create");
-        DummyApiDataPojo dummyApiDataPojo = new DummyApiDataPojo("Tom Hanks",111111,23,"Perfect image");
-        DummyApiResponseBodyPojo expectedData = new DummyApiResponseBodyPojo("success",dummyApiDataPojo,"Successfully! Record has been added.");
+    public void post01() {
+        spec.pathParam("first", "create");
+        DummyApiDataPojo dummyApiDataPojo = new DummyApiDataPojo("Tom Hanks1", 111111, 23, "Perfect image");
+        DummyApiResponseBodyPojo expectedData = new DummyApiResponseBodyPojo("success", dummyApiDataPojo, "Successfully! Record has been added.");
+
         Response response = given().spec(spec).contentType(ContentType.JSON).body(dummyApiDataPojo).when().post("/{first}");
+
         response.prettyPrint();
-        DummyApiResponseBodyPojo actualData = JsonUtil.convertJsonToJavaObject(response.asString(),DummyApiResponseBodyPojo.class);
+        DummyApiResponseBodyPojo actualData = JsonUtil.convertJsonToJavaObject(response.asString(), DummyApiResponseBodyPojo.class);
         System.out.println(actualData);
 
-        assertEquals(expectedData.getMessage(),actualData.getMessage());
-        assertEquals(expectedData.getStatus(),actualData.getStatus());
+        assertEquals(expectedData.getMessage(), actualData.getMessage());
+        assertEquals(expectedData.getStatus(), actualData.getStatus());
 
-        assertEquals(expectedData.getData().getEmployee_name(),actualData.getData().getEmployee_name());
-        assertEquals(expectedData.getData().getEmployee_salary(),actualData.getData().getEmployee_salary());
-        assertEquals(expectedData.getData().getEmployee_age(),actualData.getData().getEmployee_age());
-        assertEquals(expectedData.getData().getProfile_image(),actualData.getData().getProfile_image());
+        assertEquals(expectedData.getData().getEmployee_name(), actualData.getData().getEmployee_name());
+        assertEquals(expectedData.getData().getEmployee_salary(), actualData.getData().getEmployee_salary());
+        assertEquals(expectedData.getData().getEmployee_age(), actualData.getData().getEmployee_age());
+        assertEquals(expectedData.getData().getProfile_image(), actualData.getData().getProfile_image());
 
     }
 }
